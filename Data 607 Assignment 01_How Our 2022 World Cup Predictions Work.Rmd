@@ -1,0 +1,65 @@
+---
+title: "DATA 607 Assignment 01"
+author: "Md. Tanzil Ehsan"
+date: "02/17/2025"
+output:
+  html_document:
+    df_print: paged
+  pdf_document:
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(openintro)
+library(lubridate)
+```
+
+##Overview
+This is Assignment #1 for DATA 607. For this particular assignment I chose to use some of the data that was analyzed in the article “How Our 2022 World Cup Predictions Work”. This was interesting since it is very tough to predict who is going to win the worldcup. The entire data set is available on GitHUb at
+
+https://raw.githubusercontent.com/tanzil64/Tanzil_Data_607_Assignment01/refs/heads/main/wc_forecasts.csv
+In this project we tried to view,summarize the data set and see a relationship (if any) between the FiveThirtyEight’s Soccer Power Index (SPI) ratings  and goals scored.
+
+
+
+##Loading data from website
+
+
+
+```{r load-packages, message=FALSE}
+
+
+data_soccer<- read.csv('https://raw.githubusercontent.com/tanzil64/Tanzil_Data_607_Assignment01/refs/heads/main/wc_forecasts.csv')
+
+
+head(data_soccer)
+
+
+```
+
+```{r}
+summary(data_soccer)
+```
+```{r}
+glimpse(data_soccer)
+```
+```{r}
+sub_soccer <- data_soccer %>% select(team, group, spi,goals_scored)
+
+
+head(sub_soccer)
+```
+##Graphic Display
+```{r}
+ggplot(sub_soccer, aes(x=spi, y=goals_scored))+geom_point(aes(color=team))+geom_smooth()
+```
+
+
+
+
+
+
+##Conclusion
+From the graph we can see a positive linear relationship between  FiveThirtyEight’s Soccer Power Index (SPI) ratings  and goals scored by the teams.
